@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        body { 
+            background-color: rgb(153, 209, 226);
+        }
+
+        .mouse {
+            cursor: progress;
+            color: purple;     
+        }
+
+        #input{
+            width: 70%;
+            border-radius: 20%;
+            color: brown;
+            font-size: 20px;
+            text-align: center;
+            outline: none;
+        }
+
+        .container{
+            width: 50%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .btn{
+            border-radius: 20px;
+            outline: none;
+            margin-top: 20px;
+            font-size: 20px;
+            background-color: tomato;
+        }
+
+        a{
+            float: right;
+        }    
+
+        .yeniEleman{
+        line-height: 0.5;
+        color: blue;
+        font-style: bold;
+        border-bottom: 1px dotted red;
+        text-align: left;
+        font-size: 25px;
+        }
+
+        
+    </style>
+</head>
+
+
+<body>
+
+    <div class="container">
+        <h1>APP TO DO</h1>
+        <input type="text" id="input" value="">
+        <input onclick="newRecord()" class="btn" type="button" value="Record">
+        <input onclick="deleteAll()" class="btn" type="button" value="Delete All">
+        <p id="pList"></p>
+    </div>
+    
+
+    <script>
+
+/*** CREATE NEW RECORDS AND DELETE BUTTON FOR EVERY RECORD ***/
+function newRecord() {
+
+    let input = document.getElementById('input').value;
+
+    if (input===""){ alert("You must Enter Something to record")}
+    else {
+    var newElement = document.createElement('p');
+    newElement.innerHTML=input;
+
+    var pList = document.querySelector('p');
+    pList.appendChild(newElement);
+    newElement.className = "yeniEleman"
+    
+    var deleteElement = document.createElement('a')
+    deleteElement.className="mouse"
+    deleteElement.innerHTML="Delete"
+
+    newElement.appendChild(deleteElement)
+    newElement.addEventListener("click", Delete)
+    
+    }
+
+    
+    document.getElementById('input').value="";
+}
+
+/*************** DELETE ONLY ONE ELEMENT ***************************/
+function Delete(event) {
+    if (event.target.innerHTML === "Delete") {
+        this.parentNode.removeChild(this)
+    }
+}
+           
+
+/*************** DELETE ALL ELEMENTS ***************************/
+function deleteAll(){
+
+    let element = document.querySelector("#pList");
+
+    if (!element.firstChild){alert("There is nothing to Delete")}
+
+    else {
+    while (element.firstChild) {
+            element.removeChild(element.firstChild);
+    }
+    }
+
+}
+</script>
+
+</body>
+</html>
